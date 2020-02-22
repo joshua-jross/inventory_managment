@@ -45,36 +45,36 @@ console.log('inventory data: ', inventoryData);
 console.log('inventory JSON: ',inventoryJson);
 console.log('inventory Parse: ', inventoryParse);
 
-// const Pool = require('pg').Pool
-// const pool = new Pool({
-//   user: 'me',
-//   host: 'localhost',
-//   database: 'api',
-//   password: 'password',
-//   port: 5432,
-// })
+const Pool = require('pg').Pool
+const pool = new Pool({
+  user: 'me',
+  host: 'localhost',
+  database: 'api',
+  password: 'password',
+  port: 5432,
+})
 
-// const getPurchaseOrder = (request, response) => {
+const getPurchaseOrder = (request, response) => {
 
-//   pool.query('SELECT * FROM stockStatusView ORDER BY nextDelivery ASC', (error, results) => {
-//     if (error) {
-//       throw error
-//     }
-//     response.status(200).json(results.rows)
-//   })
-// }
+  pool.query('SELECT * FROM stockStatusView ORDER BY nextDelivery ASC', (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
 
-// create a VIEW instead form other tables. (stored select querry)
-//
-//CREATE TABLE "stockStatus"(
-//   "skuNumber" character NOT NULL,
-//   "location" character(20) NOT NULL,
-//   "available" integer(20) NOT NULL,
-//   "onHand" integer(20) NOT NULL,
-//   "onSalesOrder" integer(20) NOT NULL,
-//   "onPurchaseOrder" integer(20) NOT NULL,
-//   "nextDevilery" DATE NOT NULL,
-//   CONSTRAINT "stockStatus_pk" PRIMARY KEY("skuNumber")
-// ) WITH(
-//   OIDS = FALSE
-// );
+//create a VIEW instead form other tables. (stored select querry)
+
+CREATE TABLE "stockStatus"(
+  "skuNumber" character NOT NULL,
+  "location" character(20) NOT NULL,
+  "available" integer(20) NOT NULL,
+  "onHand" integer(20) NOT NULL,
+  "onSalesOrder" integer(20) NOT NULL,
+  "onPurchaseOrder" integer(20) NOT NULL,
+  "nextDevilery" DATE NOT NULL,
+  CONSTRAINT "stockStatus_pk" PRIMARY KEY("skuNumber")
+) WITH(
+  OIDS = FALSE
+);
